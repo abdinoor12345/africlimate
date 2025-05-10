@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Satellite Images</title>
+</head>
+<body>
+    <h1>Satellite Images</h1>
+    <ul>
+        {% for image in images %}
+            <li>
+                <h3>{{ image.name }}</h3>
+                <img src="{{ image.image.url }}" alt="{{ image.name }}">
+                <p>Date Taken: {{ image.date_taken }}</p>
+                <p>NDVI: {{ image.ndvi }}</p>
+                <p>EVI: {{ image.evi }}</p>
+                <p>Soil Moisture: {{ image.soil_moisture }}</p>
+                <p>Surface Temperature: {{ image.surface_temperature }}</p>
+                <p>Precipitation: {{ image.precipitation }}</p>
+                <p>Pest and Disease Detection: {{ image.pest_disease_detection }}</p>
+                <p>Location: {{ image.location }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

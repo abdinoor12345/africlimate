@@ -1,0 +1,128 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Imara Research{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    </head>
+    
+    <style>
+        header{
+            padding:0px;
+        }
+        body {
+            margin: 0; /* Remove default body margin */
+            padding: 0; /* Remove default body padding */
+        }
+    
+        nav {
+            background-color:#789;  
+            color: #333;  
+            padding: 0;  
+            margin: 0;  
+            position:fixed;
+            justify-content:between;
+        }
+    
+        .navbar,div {
+            margin: 0;  
+            border-radius: 0; 
+            background-color:white;  
+            color:black;  
+         }
+    
+        .navbar-header,
+        .navbar-collapse {
+            margin: 0; /* Remove margins inside the header and collapse area */
+         }
+    
+        .navbar-brand {
+            padding: 10px;  
+            color: black !important;
+            font-weight:bold;
+            font-family:serif;
+
+        }
+    
+        .navbar-nav > li > a {
+            padding: 10px 15px;  
+            color: black !important;
+font-weight:bold;
+        }.signup-item {
+            margin-left: auto;
+        }
+        
+    </style>
+    
+</head>
+<body>
+    
+     {% block nav %}
+<nav class="navbar navbar-inverse navbar-fixed-top gap-6 bg-primary"><p style="text-align:center; color:green; font-size:18px;">Imara research center</p>
+
+    <div class="container-fluid">
+        <!-- Brand and toggle -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a  style="font-size:28px;"class="navbar-brand " href="/">AfriClimate</a>
+        </div>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse ml-20" id="navbar-collapse">
+          <div class="bg-secondary text-primary">   <ul class="nav navbar-nav">
+                <li><a href="/about" >About Us</a></li>
+                <li><a href="/forecast">Pest&Disease</a></li>
+                 <li><a href="#contacts">Contacts</a></li>
+            <li><a  class="font-bold " href="/weather">Access weather</a></li>
+                <li><a class="bg-green-600  rounded-xl" href="/blogs">Blogs</a></li>
+
+                <li><a  class="btn btn-primary mx-4" href="/products">Get our products</a></li>
+ 
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'profile' %}">Profile</a></li>
+                    <li><a href="{% url 'profile' %}">dashboard</a></li>
+
+                {% else %}
+                    <!-- Move Sign Up to the right -->
+                    <li class="signup-item"><a href="/registeration" class="btn btn-primary text-black p-2">Sign Up</a></li>
+                {% endif %}
+            </ul></div>
+        </div>
+    </div>
+</nav>
+{% endblock %}
+
+
+    <main>
+        {% block content %}{% endblock %}
+    </main> 
+
+    {% block footer %}
+    <footer class="footer">
+        <span class="footer-links">
+            <a href="#about">About Us</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+            <a href="#privacy">Privacy Policy</a>
+        </span>
+        <p>&copy; 2024 Imara Research Institute. All Rights Reserved.</p>
+    </footer>
+    {% endblock %}
+</body>
+</html>

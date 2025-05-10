@@ -1,0 +1,7 @@
+<h1>Delete Crop</h1>
+<p>Are you sure you want to delete "{{ crop.name }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes</button>
+    <a href="{% url 'cropping' %}">No</a>
+</form>

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}Add Blogs{% endblock %}
+
+{% block content %}
+<style>
+    h1 {
+        margin-top: 80px;
+        text-align: center;
+        color: green;
+        font-family: Arial, sans-serif;
+    }
+
+    form {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    textarea {
+        width: 180%;
+        min-height: 150px;  
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        resize: vertical; /* Allows vertical resizing */
+    }
+input{
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+    
+}
+    button {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #218838;
+    }
+</style>
+
+<h1>Add Blogs</h1>
+<form method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        {{ form.as_p }}
+    </div>
+    <br>
+    <button class="btn btn-primary" type="submit" onclick="this.disabled=true; this.form.submit();">Add Blogs</button>
+</form>
+{% endblock %}

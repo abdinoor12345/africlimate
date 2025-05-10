@@ -1,0 +1,247 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    /* General styling for the form */
+    .forecast-form {
+        background-color: #ffffff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        padding: 32px;
+        margin-bottom: 32px;
+    }
+
+    /* Style for the labels */
+    .forecast-form label {
+        display: block;
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 8px;
+        color: #4A4A4A;
+    }
+
+    /* Input fields */
+    .forecast-form input[type="text"],
+    .forecast-form input[type="number"],
+    .forecast-form select,
+    .forecast-form textarea {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 6px;
+        border: 1px solid #d1d5db;
+        margin-bottom: 20px;
+        background-color: #f9fafb;
+    }
+
+    .forecast-form input[type="text"]:focus,
+    .forecast-form input[type="number"]:focus,
+    .forecast-form select:focus,
+    .forecast-form textarea:focus {
+        border-color: #10b981;
+        outline: none;
+        background-color: #ffffff;
+    }
+
+    /* Button styling */
+    .btn-submit {
+        background-color: #10b981;
+        color: white;
+        font-weight: bold;
+        padding: 12px 24px;
+        border-radius: 6px;
+        text-align: center;
+        font-size: 18px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btn-submit:hover {
+        background-color: #059669;
+    }
+
+    .btn-submit i {
+        margin-right: 8px;
+    }
+
+    /* Result box styling */
+    .result-box {
+        background-color: #f0f9ff;
+        border-left: 4px solid #38bdf8;
+        padding: 20px;
+        margin-bottom: 32px;
+        border-radius: 8px;
+    }
+
+    .forecast-result {
+        background-color: #f3f4f6;
+        padding: 32px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .forecast-result .forecast-list {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .forecast-result .forecast-list li {
+        margin-bottom: 8px;
+        font-size: 16px;
+    }
+
+    .forecast-result .recommendation {
+        font-weight: bold;
+        color: #10b981;
+    }
+
+    .error-text {
+        color: #ef4444;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .mt-12 {
+        margin-top: 48px;
+    }
+
+    /* Responsive layout */
+    .forecast-container {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    @media (min-width: 1024px) {
+        .forecast-container {
+            flex-direction: row;
+        }
+        
+        .form-section {
+            flex: 1;
+            min-width: 400px;
+        }
+        
+        .results-section {
+            flex: 1;
+        }
+    }
+
+    .info-section {
+        order: -1; /* Moves above the form/results on mobile */
+    }
+</style>
+
+<div class="max-w-8xl mx-auto px-4 py-8 mt-20 action-checkboxs">
+    <h1 class="text-4xl font-bold mb-8 text-center text-green-700">
+        <i class="fas fa-leaf mr-3"></i>Pest & Disease Forecast
+    </h1>
+    <h1 class="text-blue-800 font-light">Africlimate bridges the gap between farmers, climate data, and agronomic expertise, making agriculture more resilient and data-driven. 🌱</h1>
+
+    <div class="info-section">
+        <h1>
+            <i class="fas fa-info-circle mr-2 text-blue-700"></i>How to Use This Tool:
+            <p class="text-2xl text-black mb-6">
+                This tool helps farmers and agricultural experts predict pest and disease risks based on real-time weather data.
+                Simply enter your crop and location to get personalized recommendations.
+            </p>
+        </h1>
+        <p class="text-xl text-gray-700 mb-8">
+            Stay ahead of potential pest and disease risks with our real-time forecasts. Simply enter the necessary details below, and we'll provide insights tailored to your location and crop type.
+        </p>
+    </div>
+
+    <div class="forecast-container">
+        <div class="form-section">
+            <form method="post" class="forecast-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.as_p }}
+                </div>
+                <button type="submit" class="btn-submit">
+                    <i class="fas fa-search mr-2"></i>Check Forecast
+                </button>
+            </form>
+
+            {% if coordinates %}
+                <div class="result-box">
+                    <h2 class="text-2xl font-semibold text-blue-700 mb-4">
+                        <i class="fas fa-map-marker-alt mr-2"></i>Coordinates
+                    </h2>
+                    <p><span class="font-medium">Latitude:</span> {{ coordinates.latitude }}</p>
+                    <p><span class="font-medium">Longitude:</span> {{ coordinates.longitude }}</p>
+                    <p class="text-sm text-gray-600 mt-4">
+                        These coordinates represent the exact location for which the forecast is being generated. Make sure to provide accurate coordinates for better forecast accuracy.
+                    </p>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="results-section">
+            {% if forecast %}
+                <div class="forecast-result">
+                    {% if forecast.error %}
+                        <p class="error-text">{{ forecast.error }}</p>
+                    {% else %}
+                        <h2 class="text-3xl font-bold text-gray-800 mb-6">Forecast for {{ crop|title }}</h2>
+                        <ul class="forecast-list">
+                            <li><strong>Temperature:</strong> {{ forecast.temperature }}°C</li>
+                            <li><strong>Humidity:</strong> {{ forecast.humidity }}%</li>
+                            <li><strong>Weather:</strong> {{ forecast.description }}</li>
+                            <li><strong>Pest Risk:</strong> {{ forecast.risk }}</li>
+                            {% if forecast.recommendation %}
+                                <li class="recommendation"><strong>Recommendation:</strong> {{ forecast.recommendation }}</li>
+                            {% endif %}
+                        </ul>
+                        <p class="text-lg text-blue-600 mt-6">
+                            Based on the current environmental conditions, the pest risk is categorized, and recommendations are provided to help manage crop health effectively.
+                        </p>
+                    {% endif %}
+                </div>
+            {% else %}
+                <div class="forecast-result bg-blue-50 border-l-4 border-blue-400 p-6">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">How It Works</h2>
+                    <p class="text-gray-700 mb-4">
+                        Submit your location and crop information to get a personalized pest and disease forecast.
+                    </p>
+                    <ul class="list-disc ml-6 text-gray-700">
+                        <li>Enter your location coordinates</li>
+                        <li>Select your crop type</li>
+                        <li>Get real-time risk assessment</li>
+                        <li>Receive actionable recommendations</li>
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="mt-12">
+        <p class="text-2xl text-black mb-8">
+            This service provides forecasts for various pests and diseases, helping you make informed decisions about crop protection and care. The forecast considers environmental factors like temperature, humidity, and historical pest patterns.
+        </p>
+
+        <h3 class="text-3xl font-semibold text-blue-800">
+            <i class="fas fa-cogs mr-2 text-blue-700"></i>Future Features to Expect:
+        </h3>
+        <ul class="list-disc ml-6 mt-4 text-gray-700 text-2xl">
+            <li><strong>Real-Time Pest Activity Map:</strong> Visualize pest activity across regions and understand seasonal trends.</li>
+            <li><strong>Localized Pest Profiles:</strong> Get recommendations tailored to your crop type and region for better pest control.</li>
+            <li><strong>Interactive Reports:</strong> Download detailed reports on pest forecasts and recommendations for planning purposes.</li>
+            <li><strong>Notifications:</strong> Receive alerts when high-risk pest activity is forecasted in your area.</li>
+            <li><strong>Mobile Integration:</strong> (USSD/SMS for low-connectivity areas)..</li>
+            <li><strong> AI Image Recognition </strong>  for pest/disease identification from photos.</li>
+            <li><strong>  Blockchain  </strong>   for transparent supply chain tracking (e.g., certified seeds)..</li>
+
+
+
+        </ul>
+        <p class="text-sm text-gray-600 mt-6">
+            We are constantly improving our pest and disease forecast system, adding more features to ensure that you have the best tools for safeguarding your crops.
+        </p>
+    </div>
+</div>
+
+{% endblock %}

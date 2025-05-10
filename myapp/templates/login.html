@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+ {% load static %}
+ 
+{% block title %}Home - Imara Research{% endblock %}
+
+{% block content %}
+  
+
+     <center>
+    <form method="POST" style="border: 1px solid black; margin: 4%; padding:10%; border-radius:1%;">
+      {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+      {% csrf_token %}
+      <fieldset class="form-group">
+        {{ form|crispy}}
+      </fieldset>
+      <label for="user_choice">Choose your dashboard:</label>
+      <select name="user_choice" id="user_choice" required>
+          <option value="telemedics">Crop management</option>
+          <option value="finance">Finance management</option>
+          <option value="agriculture">Market prices </option>
+          <option value="home">Yield Prediction</option>
+      </select>
+ 
+     <center>      <input  class="text-primary" type="hidden" name="next" value="{{ request.GET.next }}" />
+
+      <button style="background: black; font-size: 2rem; padding:1%;" class="btn btn-outline-info" type="submit"><span class="glyphicon glyphicon-log-in"></span>   login</button>
+    </center>
+    <br/>
+    <sub style="text-align: left;"><a href="{% url 'register' %}" style="text-decoration: none; color: blue; padding:2%; cursor:pointer; margin-right:2%;">don't have account,sign up</a></sub>
+    </form>
+  </center>
+  {%endblock%}

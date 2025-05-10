@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Admin Dashboard{% endblock %}</title>
+     {% comment %} <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> {% endcomment %}
+    <style>
+                
+body{overflow-x:hidden;}
+.pagination {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.pagination span, .pagination a {
+    margin: 2px 5px;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #000;
+    border: 1px solid #ddd;
+}
+
+.pagination a:hover {
+    background-color: #f0f0f0;
+}
+
+.pagination span strong {
+    color: #fff;
+    background-color: #007bff;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+
+        form {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        form label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size:15px;
+        }
+
+        form input[type="text"],
+        form input[type="email"],
+        form input[type="date"],
+        form input[type="number"],
+        form textarea,
+        form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        form input:focus,
+        form textarea:focus,
+        form select:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+        }
+
+        button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .form-errors {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 15px;
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            border-radius: 4px;
+        }
+
+        .form-errors strong {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .form-errors ul {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        .form-errors li {
+            margin-bottom: 5px;
+        }
+    
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            overflow-x:hidden;
+        }
+        header {
+            text-align: center;
+            padding: 10px;
+            background-color: darkgreen;
+            color: white;
+        }
+        nav {
+            background-color: #333;
+            color: white;
+            padding: 10px 5px;
+            text-align: center;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .sidebar {
+            width: 160px;
+            position: fixed;
+            top: 1px;
+            left: 0;
+            height: 100%;
+            background-color: #222;
+            color: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #333;
+        }
+        .sidebar a:hover {
+            background-color: darkgreen;
+        }
+        .content {
+            margin-left: 270px;
+            padding: 20px;
+        }
+        .admin-actions {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        @media (min-width: 768px) {
+            .admin-actions {
+                grid-template-columns: 1fr 1fr;  
+            }
+        }
+        @media (min-width: 1024px) {
+            .admin-actions {
+                grid-template-columns: 1fr 1fr 1fr; 
+            }
+        }
+        .card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(2, 2, 0, 0.1);
+        }
+        footer {
+            text-align: center;
+            background-color: darkgreen;
+            color: white;
+            padding: 10px;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                flex-direction: row;
+                justify-content: center;
+                gap: 10px;
+                padding: 10px;
+                overflow-x:scroll;
+            }
+            .content {
+                margin-left: 0;
+            }
+        }
+        h1{
+            text-align:center;
+        }
+        table{
+            width:80%%;
+            height:auto;margin:10px;
+border-collapse:collapse;
+margin:20px auto;
+        }th,td{padding:2px; border:1px solid #ddd;}
+        th{background-color:#f4f4f4; font-weight:bold;  text-transform:uppercase;}
+        tr:nth-child(even){background-color:#f9f9f9;}
+        tr:hover{background-color:#f1f1f1 }
+        caption{font-size:1.5em; margin-bottom:10px;}
+        .sidebar::-webkit-scrollbar-thumb {
+            background-color: #ccc; /* Style the scrollbar thumb */
+            border-radius: 4px;
+        }
+        span,a{position:relative; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard - Imara Research Institute</h1>
+    </header>
+
+    <div class="sidebar">
+        <a href="/">Dashboard</a>
+        <a href="/doctors">Doctors List</a>
+        <a href="#manage-sections">Manage Sections</a>
+        <a href="#manage-users">Manage Users</a>
+        <a href="#statistics">View Statistics</a>
+        <a href="#settings">Settings</a>
+    </div>
+
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <footer>
+        &copy; 2024 Imara Research Institute. Admin Dashboard.
+    </footer>
+</body>
+</html>

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+ 
+{% block title %}Add Products{% endblock %}
+
+ <style>
+    
+
+    button {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #218838;
+    }
+</style>
+
+ {% block content %}
+<body class="bg-gray-100 mt-36"> 
+    <header class="  text-white py-6 mx-3 py-4">
+         <div class=" mx-auto text-center">
+            {% if messages %}
+<div class="mt-4">
+  {% for message in messages %}
+    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
+      <strong class="font-bold">Success!</strong>
+      <span class="block sm:inline">{{ message }}</span>
+    </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+         <h1 class="text-4xl font-bold mb-2 text-blue-600 p-10">Buy Our Equipment and Agricultural Products</h1><br/>
+        <h2 class="text-2xl font-semibold">High-Quality Tools for Your Farming Needs</h2>
+        <p class="mt-4 text-xl font-bold">Discover a wide range of agricultural products and equipment designed to help you achieve the best results in your farming activities. From tractors to hand tools, we have everything you need to make your work easier and more efficient.</p>
+        </p>     </div> </header>
+        <h2 class="text-3xl font-bold text-center mt-4 text-green-800">Our Products</h2>
+        <div class="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+            {% for product in products %}
+            <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                <img src="{{ product.image_url }}" alt="product" class="w-full h-auto object-cover object-center transition-transform duration-300 ease-in-out transform hover:scale-105">
+                <div class="p-4">
+                    <h2 class="text-xl font-semibold text-gray-800">{{ product.name }}</h2>
+                    <p class="text-gray-600 mt-2">{{ product.description }}</p>
+                    <span class="flex flex-row gap-2"><b>Type:</b><p class="text-green-800 font-bold">{{ product.product_type }}</p>
+                        {% if product.warranty_period %} Warranty period: {{ product.warranty_period }} {% endif %}
+                    </span>
+                    <span class="flex flex-grow gap-3"><p class="text-gray-600 mt-2">Price: Ksh.{{ product.price }}</p>
+                    <p class="text-gray-600 mt-2">Available: {{ product.available_quantity }}</p></span>
+                 <span class="flex flex-grow gap-3">   <p class="text-black font-bold">Location:{{product.location}}</p>
+                    <form method="POST" action="{% url 'inquiry' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="product_id" value="{{ product.id }}">
+                        <button class="bg-green-500 p-4 m-1 rounded-lg shadow-lg text-xl"> Send enquiry</button>
+                    </form>
+                    </span>
+                        {% if product.seed_type %} Seed type: {{ product.seed_type }} {% endif %}
+                    {% if product.growth_duration %} Growth duration: {{ product.growth_duration }} {% endif %}
+                     {% comment %} <a href="{% url 'product:product_detail' product.id %}" class="block text-center bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded mt-2">View Product</a> {% endcomment %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+     </body>
+  {% endblock %}

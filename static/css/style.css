@@ -1,0 +1,330 @@
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;overflow-x:hidden;
+}
+ /* nav {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    display: flex;
+    gap: 10px;
+    justify-content: center;align-items: center;margin-left: 40px;
+}
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+} */
+nav a:hover {
+    text-decoration: underline;
+}
+.intro {
+    padding: 20px;
+    background-color: #e8f5e9;
+    color: #000;
+}
+.intro h2 {
+    color: blue;
+    margin-bottom: 10px;
+}
+ul {
+    list-style: upper-roman;
+    padding-left: 20px;
+}
+.hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px;
+}
+.heroes{
+border:10px;
+background-color: #f4f4f4;
+}
+.hero h4 {
+    color: red;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.tick {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+.tick span {
+    color: red;
+    font-size: 40px;
+    margin-right: 10px;
+}
+.features {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    background-color: #afeeee;
+    padding: 20px;
+}
+.feature {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.feature h {
+    color: blue;
+    margin-bottom: 10px;
+}
+.container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px;
+}
+.section {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+ /* Footer Links */
+.footer {
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+}
+
+.footer-links {
+    margin-bottom: 1rem;
+}
+
+.footer-links a {
+    color: #dcdcdc;
+    text-decoration: none;
+    margin: 0 1rem;
+    font-weight: bold;
+}
+
+.footer-links a:hover {
+    color: #007bff;
+}
+@media (min-width: 768px) {
+    .hero, .features, .container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media (min-width: 1024px) {
+    .hero, .features, .container {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+} .image-container {
+            width: 100%; /* Adjust the width to your needs */
+            height: auto; /* Set the desired height */
+            overflow: hidden; /* Ensures any overflowing parts are hidden */
+            margin-top: 10px;
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures the image covers the container */
+        }/* Call-to-Action Section */
+.cta {
+    text-align: center;
+    padding: 2rem;
+    background-color: #004085;
+    color: white;
+    margin: 2rem auto;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 1200px;
+}
+
+.cta h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.cta p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.cta .btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.cta .btn:hover {
+    background-color: #0056b3;
+}/* Testimonials Section */
+.testimonials {
+    padding: 2rem;
+    background-color: #f8f9fa;
+    text-align: center;
+    margin: 2rem auto;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 1200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.testimonials h2 {
+    color: #007bff;
+    margin-bottom: 1.5rem;
+}
+
+.testimonial-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.testimonial {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 0.5rem;
+    width: 30%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial p {
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+
+.testimonial span {
+    font-weight: bold;
+    color: #333;
+}
+
+@media (max-width: 768px) {
+    .testimonial {
+        width: 90%;
+    }
+}
+/* General Body Styling */
+.telemedicine-body {
+    font-family: Arial, sans-serif;
+    margin-top: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+.telemedicine-title{
+    margin-top: 50px;
+}
+/* Navbar */
+.telemedicine-navbar {
+    background-color: #0078d7;
+    color: #fff;
+    /* padding: 1rem 1rem; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6p;
+}
+
+.telemedicine-nav-link {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 1rem;
+}
+
+/* Hero Section */
+.telemedicine-hero {
+    background: linear-gradient(135deg, #0078d7, #004a99);
+    color: #fff;
+    text-align: center;
+    padding: 3rem 1rem;margin-top: 10px;
+}
+
+.telemedicine-hero-title {
+    font-size: 2.5rem;
+    margin: 0 0 1rem;
+}
+
+.telemedicine-hero-text {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.telemedicine-btn {
+    text-decoration: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin: 0 0.5rem;
+}
+
+.telemedicine-btn-primary {
+    background-color: #ff8c00;
+    color: #fff;
+}
+
+.telemedicine-btn-secondary {
+    background-color: #fff;
+    color: #0078d7;
+    border: 2px solid #0078d7;
+}
+
+/* Features Section */
+.telemedicine-section {
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
+.telemedicine-section-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.telemedicine-features {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.telemedicine-feature-card {
+    background-color: #fff;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    text-align: left;
+}
+
+ .telemedicine-about, .telemedicine-contact {
+    max-width: 800px;
+    margin: 0 auto;
+}
+.messages li.success {
+    color: green;
+}
+
+.messages li.error {
+    color: red;
+}
+
+.messages li.info {
+    color: blue;
+}
+
+.messages li.warning {
+    color: orange;
+}
+.rounded-green { background-color: green; border-radius: 10px; color: white; padding: 20px; max-width: 400px; margin: 20px auto; text-align: center; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); } .rounded-green h2 { margin: 0; font-size: 2rem; } .rounded-green p { margin: 10px 0; font-size: 1.25rem; } .rounded-green .btn { display: inline-block; padding: 10px 20px; color: green; background-color: white; border: none; border-radius: 4px; text-decoration: none; font-size: 1rem; cursor: pointer; } .rounded-green .btn:hover { background-color: #f0f0f0; }
+ 

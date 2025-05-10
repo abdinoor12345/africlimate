@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home - Smart Farming{% endblock %}
+{% block styles %}
+<!-- Include Tailwind CSS CDN -->
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+{% endblock %}
+{% block content %}
+
+<div class="flex flex-col items-center justify-center min-h-screen bg-blue-50 text-gray-800 mt-32 w-full">
+    <h1 class="text-4xl font-bold text-blue-600 mb-6">Weather App</h1> 
+    <div class="about-section bg-green-100 p-6 rounded-lg mt-8 max-w-9xl text-center mb-4">
+        <h2 class="text-2xl font-semibold text-blue-700 mb-4">About the Weather App</h2>
+        <p class="text-2xg text-gray-900">
+            The Weather App is designed to provide farmers and agriculture enthusiasts with real-time weather insights 
+            and recommendations to improve farming practices. By analyzing local weather data, soil moisture, and other environmental 
+            factors, this app helps optimize crop planning and agricultural productivity.
+        </p>
+    </div>
+    
+    <form method="post" class="bg-white shadow-md rounded-lg px-8 py-6 mb-6 w-full max-w-2xl">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none">
+            Get Weather
+        </button>
+    </form>
+    
+    {% if city %}
+        <div class="weather-container bg-white shadow-md rounded-lg px-6 py-6 text-center max-w-9xl w-full">
+            <h2 class="text-3xl font-bold mb-4 text-red-800">Weather in {{ city }}</h2>
+            <p class="mb-2"><strong>Temperature:</strong> {{ temperature }}°C</p>
+            <p class="mb-2"><strong>Description:</strong> {{ description }}</p>
+            <p class="mb-2"><strong>Humidity:</strong> {{ humidity }}%</p>
+            <p class="mb-2"><strong>Wind Speed:</strong> {{ wind_speed }} m/s</p>
+            <p class="mb-2"><strong>Pressure:</strong> {{ pressure }} hPa</p>
+            <p class="mb-2"><strong>Visibility:</strong> {{ visibility }} meters</p>
+            <p class="mb-2"><strong>Sunrise:</strong> {{ sunrise }}</p>
+            <p class="mb-2"><strong>Sunset:</strong> {{ sunset }}</p>
+            <p class="mb-2"><strong>Soil Moisture:</strong> {{ soil_moisture }}</p>
+            <p class="mb-2"><strong>Precipitation:</strong> {{ precipitation }}</p>
+            <p class="mb-2"><strong>Temperature Extremes:</strong> {{ temperature_extremes }}</p>
+            <p class="mb-2"><strong>Wind Gusts:</strong> {{ wind_gusts }} m/s</p>
+            <p class="mb-2"><strong>UV Index:</strong> {{ uv_index }}</p>
+            <p class="mb-2"><strong>Dew Point:</strong> {{ dew_point }}°C</p>
+            <img class="mx-auto mt-4" src="http://openweathermap.org/img/w/{{ icon }}.png" alt="Weather icon">
+            <hr/>
+
+            <!-- Additional Weather Insights -->
+            <div class="mt-8 text-left ml-32">
+                <h3 class="text-xl font-semibold text-blue-700 mb-4">Weather Insights</h3>
+                <p class="mb-2">The current weather in {{ city }} is {{ description }}. Based on <strong>the temperature and humidity</strong>, here are some tips:</p>
+                <ul class="list-disc pl-6">
+                    <li>If the temperature exceeds 30°C, consider watering crops more frequently to prevent heat stress.</li>
+                    <li>High humidity may encourage the growth of fungal diseases, so ensure proper ventilation for crops.</li>
+                    <li>Be cautious of strong wind speeds as they can damage delicate plants and structures.</li>
+                </ul>
+            </div>
+
+            <!-- Seasonal Recommendations -->
+            <div class="mt-8 text-left ml-32">
+                <h3 class="text-xl font-semibold text-green-700 mb-4">Seasonal Recommendations</h3>
+                <p class="mb-2">As we are in the {{ season }} season, it's ideal for planting crops such as:</p>
+                <ul class="list-disc pl-6">
+                    <li>{{ recommended_crops_seasonal }}</li>
+                </ul>
+            </div>
+
+            <!-- Recommended Crops Section -->
+            <h2 class="text-2xl font-semibold mt-6 text-warning">Recommended Crops</h2>
+            <ul class="grid gap-4 sm:grid-cols-1 lg:grid-cols-2">
+            {% for crop in recommended_crops %}
+                <li class="bg-white p-4 rounded">
+                    <h3 class="text-2xl font-bold mb-2 text-green-500">{{ crop.name }}</h3>
+                    <p>Optimal Temperature: {{ crop.optimal_temperature_min }} - {{ crop.optimal_temperature_max }} °C</p>
+                    <p>Optimal Humidity: {{ crop.optimal_humidity_min }} - {{ crop.optimal_humidity_max }} %</p>
+                    <p>Optimal Soil Moisture: {{ crop.optimal_soil_moisture_min }} - {{ crop.optimal_soil_moisture_max }} %</p>
+                    <p style="color:blue; font-size:20px;">{{ crop.description }}</p>
+                    {% if crop.image_url %}
+                        <img src="{{ crop.image_url }}" alt="{{ crop.name }}" class="w-full h-auto mt-2"/>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+        </div>
+    {% elif error_message %}
+        <p class="text-red-500">{{ error_message }}</p>
+    {% endif %}
+</div>
+
+{% endblock %}

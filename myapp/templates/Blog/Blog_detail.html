@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ blog.title }}{% endblock %}
+
+{% block content %}
+    <div class="blog-detail max-w-9xl mx-auto p-6 bg-white shadow-md rounded-lg mt-40">
+        <h1 class="text-4xl font-bold mb-4 text-blue-400 font-bold ">{{ blog.title }}</h1>
+        <p class="text-sm text-gray-500 tracking-wide leading-relaxed">Published on: {{ blog.pub_date }}</p>
+        <img src="{{ blog.image_url }}" alt="{{ blog.title }}" class="w-full h-auto mb-6 rounded-lg">
+         <div class="prose lg:prose-xl">
+            {{ blog.content|safe|linebreaksbr }}
+        </div><br/>
+        <a  class="bg-blue-600 p-4 rounded text-white mt-10" href="{% url 'blogs' %}" class="text-blue-500">Back to Blog</a>
+        <hr/>
+        <div class="mt-4">
+        <h1 class="text-green-900 font-bold text-3xl text-center">Our Latest Blogs</h1>
+        <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            {% for related_post in related_posts%}
+            <div class="mt-4 shadow-lg bg-white ">
+                <h1 class="text-2xl font-semibold text-gray-800 mb-4">{{ related_post.title }}</h1>
+                <p class="text-sm text-gray-500 tracking-wide leading-relaxed">Published on: {{ related_post.pub_date }}</p>
+                <img src="{{ related_post.image_url }}" alt="{{ related_post.title }}" class="w-full h-auto mb-6 rounded-lg">
+                <div class="prose lg:prose-xl">
+                    {{ related_post.content|truncatechars:100|linebreaksbr }}
+            </div>
+            <a href="{% url 'blog_detail' related_post.slug %}" class="text-blue-500">Read More</a>
+        </div>
+
+            {%endfor%}
+        </div>
+    </div>
+ {% endblock %}

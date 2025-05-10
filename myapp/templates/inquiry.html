@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+ {% load static %}
+ 
+{% block title %}Send Inquiry{% endblock %}
+
+{% block content %}
+<style>
+    h1 {
+        margin-top: 80px;
+        text-align: center;
+        color: green;
+        font-family: Arial, sans-serif;
+    }
+
+    form {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    textarea {
+        width: 180%;
+        min-height: 150px;  
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        resize: vertical; /* Allows vertical resizing */
+    }
+input{
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+    
+}
+    button {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #218838;
+    }
+</style>
+
+<div class=" mx-auto py-6 mt-32 bg-gray-300 ronded-lg shadow-lg">
+    <h2 class="text-center font-bold">Welcome to Imara Research Blog</h2>
+    <p class="text-center font-bold mx-4">Discover the latest trends and innovations in agriculture. Our blog covers a wide range of topics including sustainable farming
+         practices, modern agricultural technologies, and tips for improving crop yields.
+          Stay informed and get inspired to take your farming to the next level.</p>
+</div>
+<form class=" " method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        {{ form.as_p }}
+    </div>
+    <br>
+    <button type="submit">Send Inquiry</button>
+</form>
+{% endblock %}
+```
+
+    

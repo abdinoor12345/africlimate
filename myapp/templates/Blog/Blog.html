@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+ 
+{% block title %}Home - Smart Farming{% endblock %}
+
+{% block content %}
+
+<div class=" mx-auto py-6 mt-32 bg-gray-300 ronded-lg shadow-lg">
+    <h2 class="text-center font-bold">Welcome to Smart Farming Blog</h2>
+    <p class="text-center font-bold mx-4">Discover the latest trends and innovations in agriculture. Our blog covers a wide range of topics including sustainable farming practices, modern agricultural technologies, and tips for improving crop yields. Stay informed and get inspired to take your farming to the next level.</p>
+</div>
+<div class="blog-posts grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+    {% for post in blogs %}
+        <div class="post">             
+             <a href="{% url 'blog_detail' slug=post.slug %}">{{ post.title }}</a>
+            <h3 class="font-bold text-blue-600 text-center">{{ post.title }}</h3>
+            <img  class="w-full h-80 object-cover rounded-t-lg" src="{{ post.image_url }}" alt="{{ post.title }} image" class="post-image">
+            <p class="font-bold text-xl my-4">{{ post.content|truncatechars:100|linebreaksbr }}</p>
+            <a class="bg-blue-600 p-4 rounded text-white" href="{% url 'blog_detail' slug=post.slug %}">Read more</a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

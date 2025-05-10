@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+{% block content %}
+<div class="w-full mx-auto p-4 mt-36">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Mission Section -->
+        <div class="bg-white shadow-lg rounded-lg p-6 border-2 border-blue-500">
+            <h2 class="text-3xl font-light text-center text-gray-800 mt-2">Our Mission</h2>
+            <p class="text-gray-600 mt-4 text-center">Our mission is to revolutionize agriculture through smart farming techniques. We aim to increase efficiency, reduce waste, and promote sustainable practices. By leveraging advanced technologies, we strive to create a more productive and environmentally friendly agricultural sector.</p>
+            <p class="text-gray-600 mt-4 text-center">We believe in the power of innovation to transform the way we grow food and manage resources. Our goal is to empower farmers with the tools and knowledge they need to succeed in a rapidly changing world.</p>        </div>
+
+        <!-- Team Section -->
+        <div class="bg-white shadow-lg rounded-lg p-6 border-2 border-green-500">
+            <h2 class="text-3xl text-center font-light text-gray-800 mt-2">Our Team</h2>
+            <p class="text-gray-600 mt-4 text-center">Our team consists of experts in agriculture, technology, and sustainability. We are dedicated to bringing the best solutions to farmers around the world. Our diverse backgrounds and shared passion for innovation drive us to continuously improve and adapt to new challenges.</p>
+            <p class="text-gray-600 mt-4 text-center">We work collaboratively to develop cutting-edge tools and practices that enhance productivity and sustainability. Our commitment to excellence ensures that we deliver the highest quality services and support to our clients.</p>        </div>
+
+        <!-- Contact Section -->
+        <div class="bg-white shadow-lg rounded-lg p-6 border-2 border-red-500">
+            <h2 class="text-3xl text-center font-light text-gray-800 mt-2">Contact Us</h2>
+            <p class="text-gray-600 mt-4 text-center">If you have any questions or would like to learn more about our work, please <a href="/contact" class="text-blue-500 underline">contact us</a>. We are always eager to connect with individuals and organizations who share our vision for a sustainable future.</p>
+            <p class="text-gray-600 mt-4 text-center">You can reach us via email, phone, or through our social media channels. We look forward to hearing from you and exploring how we can work together to achieve our common goals.</p>        </div>
+
+        <!-- Services Section -->
+        <div class="bg-white shadow-lg rounded-lg p-6 border-2 border-yellow-500">
+            <h2 class="text-3xl text-center font-light text-gray-800 mt-2">Our Services</h2>
+            <p class="text-gray-600 mt-4 text-center">We offer a range of services to help farmers adopt smart farming practices...</p>
+        </div>
+
+        <!-- Projects Section -->
+        <div class="bg-white shadow-lg rounded-lg p-6 border-2 border-purple-500">
+            <h2 class="text-3xl text-center font-light text-gray-800 mt-2">Our Projects</h2>
+            <p class="text-gray-600 mt-4 text-center">Our projects focus on implementing sustainable solutions in agriculture...</p>
+        </div>
+
+        <!-- Testimonials Section -->
+        <div class="bg-white shadow-lg rounded-lg p-6 border-2 border-teal-500">
+            <h2 class="text-3xl text-center font-light text-gray-800 mt-2">Testimonials</h2>
+            <p class="text-gray-600 mt-4 text-center">"Thanks to their innovative solutions, our farm has seen a significant increase in efficiency..."</p>
+            <p class="text-gray-600 mt-4 text-center">- John Doe, Farmer</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

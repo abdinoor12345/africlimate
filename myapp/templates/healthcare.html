@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home - Imara Research{% endblock %}
+
+{% block content %}
+<body class="telemedicine-body">
+
+    <!-- Navbar -->
+    <header class="telemedicine-navbar">
+        <h1 class="telemedicine-title">Imara Agriculture</h1>
+        <nav class="telemedicine-nav">
+            <a href="#features" class="telemedicine-nav-link">Features</a>
+            <a href="#about" class="telemedicine-nav-link">About</a>
+            <a href="#contact" class="telemedicine-nav-link">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="telemedicine-hero">
+        <div class="telemedicine-hero-content">
+            <h2 class="telemedicine-hero-title">Cultivating Growth, Sustaining Livelihoods</h2>
+            <p class="telemedicine-hero-text">
+                Empowering farmers with modern tools, knowledge, and support to transform agriculture for a sustainable future.
+            </p>
+            <div class="telemedicine-hero-cta">
+                <a href="login.html" class="telemedicine-btn telemedicine-btn-primary">Get Started</a>
+                <a href="signup.html" class="telemedicine-btn telemedicine-btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+    <div class="image-container">
+        <img src="{% static 'images/farming.jpg' %}" alt="Imara Agriculture">
+    </div>
+
+    <!-- Features Section -->
+    <section id="features" class="telemedicine-section">
+        <h2 class="telemedicine-section-title">Our Key Initiatives</h2>
+        <div class="telemedicine-features">
+            <div class="telemedicine-feature-card">
+                <h3>Crop Management</h3>
+                <p>Providing innovative solutions for optimal crop health and yield.</p>
+            </div>
+            <div class="telemedicine-feature-card">
+                <h3>Market Access</h3>
+                <p>Connecting farmers to markets for better pricing and distribution.</p>
+            </div>
+            <div class="telemedicine-feature-card">
+                <h3>Farmer Training</h3>
+                <p>Equipping farmers with the skills and knowledge for modern agriculture.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="telemedicine-section telemedicine-about">
+        <h2 class="telemedicine-section-title">About Us</h2>
+        <p>
+            Imara Agriculture is dedicated to revolutionizing farming practices by integrating technology, education, and market access. We aim to
+            empower communities, enhance food security, and promote sustainable agricultural practices.
+        </p>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="telemedicine-section telemedicine-contact">
+        <h2 class="telemedicine-section-title">Get in Touch</h2>
+        <p>Email us at <a href="mailto:support@imaraagriculture.com">support@imaraagriculture.com</a></p>
+    </section>
+
+</body>
+{% endblock %}
